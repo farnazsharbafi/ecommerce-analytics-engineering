@@ -1,8 +1,15 @@
+
 # E-commerce Analytics Engineering | Olist
 
 An end-to-end analytics engineering portfolio project demonstrating **Python ingestion → Supabase PostgreSQL → dbt modeling & data quality tests → Streamlit/Plotly dashboard**.
 
-**[🚀 Live interactive dashboard](https://ecommerce-analytics-engineering-gtqt8wgxlrn4nyxmcttjum.streamlit.app/)**
+## 📊 Interactive Dashboard Preview
+
+[![E-commerce Analytics Dashboard](assets/dashboard_demo_cropped_v2.gif)](https://ecommerce-analytics-engineering-gtqt8wgxlrn4nyxmcttjum.streamlit.app/)
+
+**[🚀 Explore the Live Interactive Dashboard](https://ecommerce-analytics-engineering-gtqt8wgxlrn4nyxmcttjum.streamlit.app/)**
+
+*Click the animated dashboard preview to explore the fully interactive version.*
 
 ## What it demonstrates
 
@@ -11,6 +18,7 @@ An end-to-end analytics engineering portfolio project demonstrating **Python ing
 - 2 fact tables (`fct_orders`, `fct_order_items`) and 2 dimension tables (`dim_customers`, `dim_products`)
 - Monthly KPI mart (revenue, orders, AOV, delivery performance)
 - Interactive charts for reporting period and product category
+
 
 ### Project structure
 
