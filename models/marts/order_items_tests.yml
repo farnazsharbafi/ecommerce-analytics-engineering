@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: fct_order_items
+    description: "Order-item-level fact table for product sales analysis."
+
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('fct_orders')
+                field: order_id
+
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_id
+
+      - name: order_item_id
+        data_tests:
+          - not_null

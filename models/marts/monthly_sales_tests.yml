@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: mart_monthly_sales
+    description: "Monthly ecommerce performance KPIs based on purchase month."
+
+    columns:
+      - name: order_month
+        data_tests:
+          - unique
+          - not_null
+
+      - name: total_orders
+        data_tests:
+          - not_null
+
+      - name: delivered_orders
+        data_tests:
+          - not_null

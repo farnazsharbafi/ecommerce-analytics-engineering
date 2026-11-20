@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Order-level fact table with financial and delivery metrics."
+    columns:
+      - name: order_id
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+
+  - name: dim_customers
+    description: "Customer dimension, keyed by customer_id."
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_products
+    description: "Product dimension, keyed by product_id."
+    columns:
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null
