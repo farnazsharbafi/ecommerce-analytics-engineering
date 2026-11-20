@@ -1,56 +1,58 @@
+# E-commerce Analytics Engineering | Olist
 
-# E-commerce Analytics Engineering
+An end-to-end analytics engineering portfolio project demonstrating **Python ingestion → Supabase PostgreSQL → dbt modeling & data quality tests → Streamlit/Plotly dashboard**.
 
-An end-to-end analytics engineering project using the
-Brazilian Olist E-commerce dataset.
+**[🚀 Live interactive dashboard](https://ecommerce-analytics-engineering-gtqt8wgxlrn4nyxmcttjum.streamlit.app/)**
 
-### 🚀 Live Interactive Dashboard
+## What it demonstrates
 
-**[👉 Explore the Dashboard](https://ecommerce-analytics-engineering-gtqt8wgxlrn4nyxmcttjum.streamlit.app/)**
+- 5 original Olist datasets ingested into PostgreSQL (`raw` schema)
+- 5 staging views with 13 data quality tests
+- 2 fact tables (`fct_orders`, `fct_order_items`) and 2 dimension tables (`dim_customers`, `dim_products`)
+- Monthly KPI mart (revenue, orders, AOV, delivery performance)
+- Interactive charts for reporting period and product category
 
-## Project Overview
+### Project structure
 
-This project transforms raw e-commerce transactions
-into analytics-ready datasets and interactive business
-insights.
+```text
+notebooks/
+  01_raw_data_ingestion.ipynb
+  02_dbt_staging.ipynb
+  03_dbt_marts.ipynb
+  04_dashboard_data_export.ipynb
+models/
+  staging/                # sources, SQL views, dbt tests
+  marts/                  # facts, dimensions, KPI mart, tests
+dbt_project.yml
+olist_dashboard/           # already deployed Streamlit app; preserve existing folder
+  app.py
+  requirements.txt
+  data/
+    monthly_sales.csv
+    monthly_categories.csv
+```
 
-## Technology Stack
+## Run in Google Colab
 
-- Python & Pandas — Data ingestion
-- Supabase PostgreSQL — Cloud database
-- dbt Core — SQL transformations and testing
-- Streamlit — Interactive dashboard
-- Plotly — Data visualization
+Notebooks must be **opened** in Colab (File → Open notebook → GitHub or Upload), not merely uploaded into the runtime Files sidebar.
 
-## Analytics Features
+| Order | Notebook | Purpose |
+|---|---|---|
+| 1 | [Raw ingestion](notebooks/01_raw_data_ingestion.ipynb) | Safe create-if-missing ingestion; skips existing tables |
+| 2 | [dbt staging](notebooks/02_dbt_staging.ipynb) | Compile/build 5 staging models and tests |
+| 3 | [dbt marts](notebooks/03_dbt_marts.ipynb) | Build facts, dimensions and KPI mart |
+| 4 | [Dashboard export](notebooks/04_dashboard_data_export.ipynb) | Generate aggregated dashboard CSVs |
 
-- Monthly sales and revenue trends
-- Order volume and average order value
-- Delivery performance
-- Product category rankings
-- Interactive reporting-period and category filters
+**[Open notebook 01 in Colab](https://colab.research.google.com/github/farnazsharbafi/ecommerce-analytics-engineering/blob/main/notebooks/01_raw_data_ingestion.ipynb)** · **[02](https://colab.research.google.com/github/farnazsharbafi/ecommerce-analytics-engineering/blob/main/notebooks/02_dbt_staging.ipynb)** · **[03](https://colab.research.google.com/github/farnazsharbafi/ecommerce-analytics-engineering/blob/main/notebooks/03_dbt_marts.ipynb)** · **[04](https://colab.research.google.com/github/farnazsharbafi/ecommerce-analytics-engineering/blob/main/notebooks/04_dashboard_data_export.ipynb)**
 
-## Data Pipeline
+**Prerequisites:** a Supabase PostgreSQL database and a private Session-pooler URI, the 5 Olist CSVs for a fresh database, and the dbt project files already pushed to this repository. SQL notebooks use `dbt_dev` as the development schema. Run each notebook from top to bottom. Colab runtimes are temporary.
 
-Olist Dataset
-    ↓
-Python Data Ingestion
-    ↓
-Supabase PostgreSQL
-    ↓
-dbt Staging & Marts
-    ↓
-Dashboard-ready Datasets
-    ↓
-Streamlit & Plotly Dashboard
+The notebooks are *not* executed by GitHub itself. GitHub displays them; Colab runs them. All original transaction data is historical. Dashboard files are exported aggregates, so visitors do not need access to private Supabase credentials.
 
-## Dataset
+**Security:** Never publish `profiles.yml`, secrets, database URLs or raw person-level CSVs. The project's `.gitignore` excludes these. Check notebook output before committing.
 
-Brazilian E-commerce Public Dataset by Olist.
+**Note on metrics:** order-level revenue uses recorded payments on delivered orders (potentially including freight); category revenue uses item prices excluding freight. Historical metrics are grouped by purchase month; they are not real-time sales.
 
-Historical transaction data; not live sales.
+## Data source
 
-## Dashboard Code
-
-The dashboard application and exported datasets
-are available in the `olist_dashboard/` folder.
+[Olist Brazilian E-Commerce Public Dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) — historical transactions used solely for portfolio analysis.
